@@ -1,0 +1,27 @@
+syntax = "proto3";
+option go_package = "github.com/lkorsman/hockey-player-grpc/player";
+
+import "google/protobuf/timestamp.proto";
+
+message Goal {
+  string playerName = 1;
+  google.protobuf.Timestamp timeOfGoal = 2;
+}
+
+message GoalResponse {
+  string status = 1;
+}
+
+message PlayerRequest {
+  string name = 1;
+  repeated Goal goal = 2;
+}
+
+message PlayerResponse {
+  string status = 1;
+}
+
+service Player {
+  rpc Create(PlayerRequest) returns (PlayerResponse);
+  rpc AddGoal(Goal) returns (GoalResponse);
+}
